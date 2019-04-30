@@ -1,3 +1,4 @@
+// 遍历一遍hash
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -5,7 +6,7 @@ public:
         for(int i=0;i<nums.size();++i){
             int gap = target - nums[i];
             if(hashmap.find(gap)!=hashmap.end() && hashmap[gap]!=i) return{i,hashmap[gap]};
-            hashmap[nums[i]]=i;   // pos
+            hashmap[nums[i]]=i;   // 注意位置
         }
         return {};
     }
