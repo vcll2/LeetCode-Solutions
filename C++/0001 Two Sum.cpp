@@ -5,7 +5,7 @@ public:
         for(int i=0;i<nums.size();++i){
             int gap = target - nums[i];
             if(hashmap.find(gap)!=hashmap.end() && hashmap[gap]!=i) return{i,hashmap[gap]};
-            hashmap[nums[i]]=i;   // 注意位置
+            hashmap[nums[i]]=i;   // pos
         }
         return {};
     }
