@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool used[9];
+        for(int i=0;i<9;++i){
+            fill(used,used+9,false);
+            for(int j=0;j<9;j++){
+                if (!checkused((board[i][j]),used)) return false;
+            }
+            
+            fill(used,used+9,false);
+            for(int j=0;j<9;++j){
+                if(!checkused((board[j][i]),used)) return false;
+            }
+        }
+        
+        for(int i=0;i<3;++i){
+            for(int j=0;j<3;++j){
+                fill(used,used+9,false);
+                
+                for(int r=i*3;r<i*3+3;++r){
+                    for(int c=j*3;c<j*3+3;++c){
+                        if(!checkused((board[r][c]),used)) return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    bool checkused(char c,bool used[9]){
+        if(c=='.') return true;
+        else if(used[c-'1']==true) return false;
+        return used[c-'1']=true;
+    }
+};
