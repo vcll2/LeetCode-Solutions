@@ -1,49 +1,51 @@
-class Solution {      //set
-public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-    set<vector<int>> s;
-    sort(nums.begin(), nums.end());
-    for(int i = 0; i < (int)nums.size() - 3; ++i) {      // nums.size() is an unsigned
-        for(int j = i + 1; j < nums.size() - 2; ++j) {
-            int k = j + 1, l = nums.size() - 1;
-            while(k < l) {
-                int cur = nums[i] + nums[j] + nums[k] + nums[l];
-                if(cur == target) {
-                    s.insert({nums[i], nums[j], nums[k], nums[l]});
-                    ++k;
-                    --l;
-                } else if(cur < target) ++k;
-                else --l;
-            }
-        }
-    }
-    return vector<vector<int>>(s.begin(), s.end());
-  }
-};
-
-class Solution1 {     //vector
+class Solution {     
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         vector<vector<int>> s;
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<(int)nums.size()-3;++i){
-            if(i>0 && nums[i]==nums[i-1]) continue;
-            for(int j=i+1;j<nums.size()-2;++j){
-                if(j>i+1 && nums[j]==nums[j-1]) continue;
-                int k=j+1,l=nums.size()-1;
-                while(k<l){
-                    int cur = nums[i]+nums[j]+nums[k]+nums[l];
-                    if(cur==target){
-                        s.push_back({nums[i],nums[j],nums[k],nums[l]});
-                        while(k<l && nums[k]==nums[k+1]) ++k;
-                        while(k<l && nums[l]==nums[l-1]) --l;
-                              ++k;--l;
-                    }
-                    else if(cur<target) ++k;
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < (int)nums.size() - 3; ++i) {
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            for(int j = i + 1; j < nums.size() - 2; ++j) {
+                if(j > i + 1 && nums[j] == nums[j - 1]) continue;
+                int k = j + 1, l = nums.size() - 1;
+                while(k < l) {
+                    int cur = nums[i] + nums[j] + nums[k] + nums[l];
+                    if(cur == target) {
+                        s.push_back({nums[i], nums[j], nums[k], nums[l]});
+                        while(k < l && nums[k] == nums[k + 1]) ++k;
+                        while(k < l && nums[l] == nums[l - 1]) --l;
+                        ++k;
+                        --l;
+                    } else if(cur < target) ++k;
                     else --l;
                 }
             }
         }
         return s;
+    }
+};
+
+
+
+class Solution1 {      //set
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        set<vector<int>> s;
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < (int)nums.size() - 3; ++i) {      // nums.size() is an unsigned
+            for(int j = i + 1; j < nums.size() - 2; ++j) {
+                int k = j + 1, l = nums.size() - 1;
+                while(k < l) {
+                    int cur = nums[i] + nums[j] + nums[k] + nums[l];
+                    if(cur == target) {
+                        s.insert({nums[i], nums[j], nums[k], nums[l]});
+                        ++k;
+                        --l;
+                    } else if(cur < target) ++k;
+                    else --l;
+                }
+            }
+        }
+        return vector<vector<int>>(s.begin(), s.end());
     }
 };
