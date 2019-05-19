@@ -1,0 +1,20 @@
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if(!head || !head->next) return head;
+        ListNode* dummy = new ListNode(-1), *pivot, *pre = dummy;
+        dummy->next = head;
+        while(pre->next && pre->next->val < x) pre = pre->next;
+        pivot = pre->next;
+        while(pivot && pivot->next) {
+            if(pivot->next->val < x) {
+                ListNode *tmp = pivot->next;
+                pivot->next = tmp->next;
+                tmp->next = pre->next;
+                pre->next = tmp;
+                pre = tmp;
+            } else pivot = pivot->next;
+        }
+        return dummy->next;
+    }
+};
