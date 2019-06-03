@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        if(!root) return true;
+        return (abs(getH(root->left) - getH(root->right)) <= 1) && isBalanced(root->left) && isBalanced(root->right);
+    }
+
+    int getH(TreeNode *node) {
+        if(!node) return 0;
+        return max(getH(node->left), getH(node->right)) + 1;
+    }
+};
+
+class Solution1 {
+public:
+    bool isBalanced(TreeNode * root) {
+        return getH(root) != -1;
+    }
+
+    int getH(TreeNode * node) {
+        if(!node) return 0;
+        int left = getH(node->left);
+        int right = getH(node->right);
+        if(left < 0 || right < 0 || abs(left - right) > 1) return -1;
+        return max(left, right) + 1;
+    }
+};
