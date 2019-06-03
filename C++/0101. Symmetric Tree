@@ -11,3 +11,25 @@ public:
         return (p->val == q->val) && isSymmetric(p->left, q->right) && isSymmetric(p->right, q->left);
     }
 };
+
+class Solution1 {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(!root) return true;
+        stack<TreeNode*> st{{root->left, root->right}};
+        while(!st.empty()) {
+            auto q = st.top();
+            st.pop();
+            auto p = st.top();
+            st.pop();
+            if(!q && !p) continue;
+            if(!q || !p) return false;
+            if(q->val != p->val) return false;
+            st.push(q->left);
+            st.push(p->right);
+            st.push(q->right);
+            st.push(p->left);
+        }
+        return true;
+    }
+};
